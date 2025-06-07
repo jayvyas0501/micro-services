@@ -1,0 +1,36 @@
+# Node dependencies
+node_modules/
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS-specific
+.DS_Store
+Thumbs.db
+
+# Environment variables
+.env
+.env.*
+
+# Build output
+dist/
+build/
+
+# Editor folders
+.vscode/
+.idea/
+
+# Optional if you use pm2 or other tools
+pids/
+*.pid
+*.seed
+
+# Coverage reports
+coverage/
+
+# Local docker configs, if any
+docker-compose.override.yml
