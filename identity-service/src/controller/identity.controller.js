@@ -29,7 +29,7 @@ export const registerUser = wrapAsync(async (req, res) => {
 
   logger.warn("user register successfully!", user._id);
 
-  const { accessToken, refreshToken } = await generateToken(user);
+  const { accessToken, refreshToken } = await generateTokens(user);
 
   res.status(201).json({
     success: true,
@@ -119,6 +119,21 @@ export const refreshTokenUser = wrapAsync(async (req, res) => {
   });
 });
 
-export const logout = wrapAsync((req,res) => {
+export const logout = wrapAsync(async (req,res) => {
     logger.info('logout endpoint hit...')
+
+    const {refreshToken} = req.body
+    if(!refreshToken){
+      logger.warn("Refresh token is missing!")
+      return res.status(400).json({
+        success:false,
+        message: "Refresh token is missing!"
+    })
+  }
+  await RefreshToken.deleteOne({token:refreshToken})
+
+  res.json({
+    success:true,
+    message:"User logged out!"
+  })
 })
