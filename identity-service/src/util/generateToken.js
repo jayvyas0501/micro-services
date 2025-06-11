@@ -2,7 +2,7 @@ import jwt from "jsonwebtoken";
 import crypto from "crypto";
 import { RefreshToken } from "../model/refreshToken.model.js";
 
-export const generateToken = async (user) => {
+export const generateTokens = async (user) => {
   const accessToken = jwt.sign(
     {
       userId: user._id,
