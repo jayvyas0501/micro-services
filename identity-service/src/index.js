@@ -66,7 +66,7 @@ const sensitiveEndpointsLimiter =  rateLimit({
   legacyHeaders:false,
   handler: (req,res) =>{
     logger.warn(`Sensitive endpoint rate limit exceeded for IP: ${req.ip}!`)
-  res.statusMessage(429).json({success:false,message:"too many requests"})  
+    res.status(429).json({success:false,message:"too many requests"})  
   },
   store : new RedisStore({
     sendCommand: (...args) => redisClient.call(...args)
@@ -74,7 +74,6 @@ const sensitiveEndpointsLimiter =  rateLimit({
 })
 
 app.use('/api/auth/register',sensitiveEndpointsLimiter)
-
 
 app.use('/api/auth',routes)
 
